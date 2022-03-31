@@ -1,0 +1,62 @@
+@startuml
+!theme materia
+skinparam componentStyle uml1
+
+title [ARCH]: TO BE
+
+agent Client
+cloud "NGINX" as server
+Client <--> server
+agent Analyst
+Analyst <--> server
+
+node Content {
+    database Movies
+    database SearchMovies
+    node Admin_panel {
+        database Staff
+        component Django_Admin
+        component Django_API
+        Django_Admin <-> Staff
+    }
+    node ETL {
+        database State
+        file Extractor
+        file Transformer
+        file Loader
+        State <-- Extractor
+        State <--> Transformer
+        State --> Loader
+    }
+    node Async_API {
+        component Search_API
+        database Cache
+        Search_API <-> Cache
+    }
+    Movies --> ETL
+    Admin_panel <--> Movies
+    ETL --> SearchMovies
+    Async_API <--> SearchMovies
+}
+server <--> Content
+
+node Auth {
+    component Auth_API
+    component OAuth2.0_API
+    database Users
+    Auth_API --> Users
+    OAuth2.0_API --> Users
+
+}
+server <--> Auth
+node UGC {
+        component UGC_Api
+        queue Kafka
+        UGC_Api -> Kafka
+        node UGC_ETL
+        Kafka -> UGC_ETL
+        database ClickHouse
+        UGC_ETL -> ClickHouse
+    }
+server <--> UGC
+@enduml
