@@ -1,8 +1,6 @@
-import asyncio
 import logging
 
 import uvicorn
-from aiokafka import AIOKafkaProducer
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
@@ -20,15 +18,15 @@ app = FastAPI(
 )
 
 
-aioproducer = get_kafka_producer()
-
 @app.on_event("startup")
 async def startup_event():
+    aioproducer = get_kafka_producer()
     await aioproducer.start()
 
 
 @app.on_event("shutdown")
 async def shutdown_event():
+    aioproducer = get_kafka_producer()
     await aioproducer.stop()
 
 
