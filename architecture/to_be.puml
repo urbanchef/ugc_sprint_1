@@ -50,13 +50,17 @@ node Auth {
 }
 server <--> Auth
 node UGC {
+    node OLTP {
         component UGC_Api
         queue Kafka
         UGC_Api -> Kafka
-        node UGC_ETL
-        Kafka -> UGC_ETL
-        database ClickHouse
-        UGC_ETL -> ClickHouse
     }
+    node UGC_ETL
+    node OLAP {
+        database ClickHouse
+    }
+    OLTP --> UGC_ETL
+    UGC_ETL --> OLAP
+}
 server <--> UGC
 @enduml
