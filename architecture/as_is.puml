@@ -1,0 +1,50 @@
+@startuml
+!theme materia
+skinparam componentStyle uml1
+
+title [ARCH]: AS IS
+
+agent Client
+cloud "NGINX" as server
+Client <--> server
+
+node Content {
+    database Movies
+    database SearchMovies
+    node Admin_panel {
+        database Staff
+        component Django_Admin
+        component Django_API
+        Django_Admin <-> Staff
+    }
+    node ETL {
+        database State
+        file Extractor
+        file Transformer
+        file Loader
+        State <-- Extractor
+        State <--> Transformer
+        State --> Loader
+    }
+    node Async_API {
+        component Search_API
+        database Cache
+        Search_API <-> Cache
+    }
+    Movies --> ETL
+    Admin_panel <--> Movies
+    ETL --> SearchMovies
+    Async_API <--> SearchMovies
+}
+server <--> Content
+
+node Auth {
+    component Auth_API
+    component OAuth2.0_API
+    database Users
+    Auth_API --> Users
+    OAuth2.0_API --> Users
+
+}
+server <--> Auth
+@enduml
