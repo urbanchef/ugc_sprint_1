@@ -11,3 +11,6 @@ PROJECT_DESCRIPTION = os.getenv('PROJECT_DESCRIPTION', 'Сервис трекк�
 
 KAFKA_HOST = os.getenv('KAFKA_HOST', '127.0.0.1')
 KAFKA_PORT = int(os.getenv('KAFKA_PORT', 9092))
+
+jwt_secret_key = os.getenv('SECRET_KEY')
+jwt_algorithms = ['HS256']
