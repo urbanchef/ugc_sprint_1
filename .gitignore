@@ -4,8 +4,6 @@
 # venv
 .env
 .venv
-poetry.lock
-pyproject.toml
 
 # OSX
 .DS_Store
