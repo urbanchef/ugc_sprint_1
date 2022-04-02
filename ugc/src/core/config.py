@@ -16,8 +16,8 @@ class ProjectConfig(BaseSettings):
 
     name: str = "UGC API Service"
     description: str = "User activity tracking"
-    docs_url: str = '/api/openapi'
-    openapi_url: str = '/api/openapi.json'
+    docs_url: str = "/api/openapi"
+    openapi_url: str = "/api/openapi.json"
 
 
 class KafkaConfig(BaseSettings):
@@ -32,3 +32,11 @@ class KafkaConfig(BaseSettings):
     sasl_plain_username: Optional[str]
     sasl_plain_password: Optional[SecretStr]
     ssl_cafile: Optional[FilePath] = None
+
+
+class JWTConfig(BaseSettings):
+    class Config:
+        env_prefix = "JWT_"
+
+    secret_key: str = "buz"
+    algorithms: List[str] = ["HS256"]
