@@ -4,9 +4,8 @@ import logging
 from aiokafka import AIOKafkaProducer
 from fastapi import APIRouter, Depends
 
-from dependency import get_kafka_producer
-from schemas.producer import ProducerMessage, ProducerResponse
-
+from ...dependency import get_kafka_producer
+from ...schemas.producer import ProducerMessage, ProducerResponse
 
 router = APIRouter()
 
