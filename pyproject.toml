@@ -12,7 +12,7 @@ aiokafka = "^0.7.2"
 
 
 [tool.poetry.dev-dependencies]
-black = { version = "*", allow-prereleases = true }
+black = { version = "*", allow-prereleases = true, extras = ["d"] }
 coverage = "*"
 flake8 = "*"
 isort = "*"
@@ -77,7 +77,7 @@ ignore-comments = true
 
 
 [tool.pytest.ini_options]
-asyncio_mode= "strict"
+asyncio_mode = "strict"
 log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(levelname)-5.5s [%(name)s] %(message)s"
