@@ -1,13 +1,11 @@
 from http import HTTPStatus
 
-from fastapi.testclient import TestClient
+import pytest
 
-from ugc.src import app
-
-client = TestClient(app)
+pytestmark = pytest.mark.asyncio
 
 
-def test_track_movie_progress():
+async def test_track_movie_progress(make_post_request):
     headers = {
         "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.\
         eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0ODkzMDUzMSwianRpIjoiNTlkYjUzMzUtY\
@@ -22,8 +20,8 @@ def test_track_movie_progress():
     movie_id = "d50728e2-4f3e-4070-a5ba-6c3de400a9a4"
     topic_name = "views"
     json = {"unix_timestamp_utc": 1649006765}
-    response = client.post(
-        f"/api/v1/producer/{topic_name}/{movie_id}", headers=headers, json=json
+    response = await make_post_request(
+        f"/producer/{topic_name}/{movie_id}", headers=headers, data=json
     )
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {
