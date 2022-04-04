@@ -2,8 +2,9 @@
 .idea
 
 # venv
-.env
-.venv
+*.env
+*.venv
+*.pem
 
 # OSX
 .DS_Store
@@ -99,3 +100,4 @@ ENV/
 
 # Project
 /auth_api/auth_api.db
+/CA.pem

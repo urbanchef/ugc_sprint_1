@@ -15,8 +15,6 @@ app = FastAPI(
     default_response_class=ORJSONResponse,
 )
 
-jwt_cfg = JWTConfig()
-
 
 @app.middleware("http")
 async def jwt_handler(request: Request, call_next):
@@ -40,6 +38,7 @@ async def jwt_handler(request: Request, call_next):
         }
     """
 
+    cfg = JWTConfig()
     user_uuid: dict = {}
     token_status = "None"
 
@@ -48,9 +47,7 @@ async def jwt_handler(request: Request, call_next):
         token_status = "OK"
         jwt_token = auth_header.split(" ")[1]
         try:
-            payload = jwt.decode(
-                jwt_token, jwt_cfg.secret_key, algorithms=jwt_cfg.algorithms
-            )
+            payload = jwt.decode(jwt_token, cfg.secret_key, algorithms=cfg.algorithms)
             user_uuid = payload.get("user_uuid", {})
         except JWTError as e:
             token_status = f"Error: {e}"
