@@ -36,7 +36,7 @@ async def http_client():
 def make_get_request(http_client):
     async def inner(method: str, params: dict = None) -> HTTPResponse:
         params = params or {}
-        url = settings.service_url + "/api/v1" + method
+        url = f"{settings.service_url}/api/v1{method}"
         async with http_client.get(url, params=params) as response:
             return HTTPResponse(
                 body=await response.json(),
@@ -47,13 +47,13 @@ def make_get_request(http_client):
     return inner
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def make_post_request(http_client):
     async def inner(
         method: str, data: dict = None, headers: dict = None
     ) -> HTTPResponse:
         data = data or {}
-        url = settings.service_url + "/api/v1" + method
+        url = f"{settings.service_url}/api/v1{method}"
         async with http_client.post(url, data=data, headers=headers) as response:
             return HTTPResponse(
                 body=await response.json(),

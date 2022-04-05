@@ -10,7 +10,6 @@ fastapi = "^0.75.1"
 uvicorn = "^0.17.6"
 aiokafka = "^0.7.2"
 python-jose = "^3.3.0"
-requests = "2.27.1"
 
 
 [tool.poetry.dev-dependencies]
