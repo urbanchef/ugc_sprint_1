@@ -1,50 +1,58 @@
 @startuml
 !theme materia
 skinparam componentStyle uml1
+skinparam backgroundColor MOTIVATION
 
-title [ARCH]: AS IS
+title [ARCH]: TO BE
 
 agent Client
 cloud "NGINX" as server
-Client <--> server
+Client <--> server: Клиентские запросы
+agent Analyst
+Analyst <--> server: Аналитические запросы
 
 node Content {
     database Movies
     database SearchMovies
-    node Admin_panel {
+    frame Admin_panel {
         database Staff
         component Django_Admin
         component Django_API
-        Django_Admin <-> Staff
+        Django_Admin <-> Staff: Данные персонала
     }
-    node ETL {
+    frame ETL {
         database State
         file Extractor
         file Transformer
         file Loader
-        State <-- Extractor
-        State <--> Transformer
-        State --> Loader
+        State <-- Extractor: Сырые данные
+        State <--> Transformer: Обработка данных
+        State --> Loader: Подготовленные данные
     }
-    node Async_API {
+    frame Async_API {
         component Search_API
         database Cache
-        Search_API <-> Cache
+        Search_API <-> Cache: Кэширование
     }
-    Movies --> ETL
-    Admin_panel <--> Movies
-    ETL --> SearchMovies
-    Async_API <--> SearchMovies
+    Movies --> Extractor: Выгрузка сырых данных
+    Django_Admin <--> Movies: Работа с контентом
+    Django_API <--> Movies: Запросы контента
+    Loader --> SearchMovies: Загрузка подготовденных данных
+    Search_API <--> SearchMovies: Поиск контента
 }
-server <--> Content
+
+server <--> Django_API: Запросы фильмов/жанров/персон по UUID
+server <--> Search_API: Поисковые запросы
+server <--> Django_Admin: Добавление/удаление/редактирование контента персоналом
 
 node Auth {
     component Auth_API
     component OAuth2.0_API
     database Users
-    Auth_API --> Users
-    OAuth2.0_API --> Users
-
+    Auth_API <--> Users: Работа с пользовательскими данными
+    OAuth2.0_API <--> Users
 }
-server <--> Auth
+
+server <---> Auth_API: Авторизация с помощью пользовательских данных
+server <--> OAuth2.0_API: Авторизация через соц.сети
 @enduml
