@@ -7,7 +7,6 @@ services:
     restart: always
     env_file:
       - ".env"
-    command: python -m ugc.src
 
   zookeeper:
     image: zookeeper:3.8
@@ -16,7 +15,6 @@ services:
 
   clickhouse-node1:
     image: clickhouse/clickhouse-server:22.3.2.2
-#    image: yandex/clickhouse-server:20.4
     container_name: clickhouse-node1
     hostname: clickhouse-node1
     ports:

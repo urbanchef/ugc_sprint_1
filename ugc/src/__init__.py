@@ -3,8 +3,8 @@ from fastapi.responses import ORJSONResponse
 from jose import JWTError, jwt
 
 from .api.v1 import event
-from .core.config import JWTConfig, ProjectConfig
-from .dependency import get_kafka_producer
+from .core.config import ProjectConfig
+from .dependency import get_jwt_settings, get_kafka_producer
 
 project_cfg = ProjectConfig()
 app = FastAPI(
@@ -38,7 +38,7 @@ async def jwt_handler(request: Request, call_next):
         }
     """
 
-    cfg = JWTConfig()
+    cfg = get_jwt_settings()
     user_uuid: dict = {}
     token_status = "None"
 
