@@ -3,8 +3,8 @@ from fastapi.responses import ORJSONResponse
 from jose import JWTError, jwt
 
 from .api.v1 import event
-from .core.config import JWTConfig, ProjectConfig
-from .dependency import get_kafka_producer
+from .core.config import ProjectConfig
+from .dependency import get_jwt_settings, get_kafka_producer
 
 project_cfg = ProjectConfig()
 app = FastAPI(
@@ -14,8 +14,6 @@ app = FastAPI(
     openapi_url=project_cfg.openapi_url,
     default_response_class=ORJSONResponse,
 )
-
-jwt_cfg = JWTConfig()
 
 
 @app.middleware("http")
@@ -40,6 +38,7 @@ async def jwt_handler(request: Request, call_next):
         }
     """
 
+    cfg = get_jwt_settings()
     user_uuid: dict = {}
     token_status = "None"
 
@@ -48,9 +47,7 @@ async def jwt_handler(request: Request, call_next):
         token_status = "OK"
         jwt_token = auth_header.split(" ")[1]
         try:
-            payload = jwt.decode(
-                jwt_token, jwt_cfg.secret_key, algorithms=jwt_cfg.algorithms
-            )
+            payload = jwt.decode(jwt_token, cfg.secret_key, algorithms=cfg.algorithms)
             user_uuid = payload.get("user_uuid", {})
         except JWTError as e:
             token_status = f"Error: {e}"

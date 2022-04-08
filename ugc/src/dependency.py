@@ -5,7 +5,7 @@ from typing import Any, Dict
 
 from aiokafka import AIOKafkaProducer
 
-from .core.config import KafkaConfig
+from .core.config import JWTConfig, KafkaConfig
 
 logger = logging.getLogger(__name__)
 
@@ -26,3 +26,8 @@ def get_kafka_producer() -> AIOKafkaProducer:
         params["ssl_context"] = ssl.create_default_context(cafile=cfg.ssl_cafile)
 
     return AIOKafkaProducer(**params)
+
+
+@lru_cache()
+def get_jwt_settings() -> JWTConfig:
+    return JWTConfig()
