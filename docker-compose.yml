@@ -1,12 +1,12 @@
 services:
   ugc:
-    build:
-      context: .
-      dockerfile: ./ugc/Dockerfile
+    build: .
     container_name: ugc
     restart: always
     env_file:
-      - ".env"
+      - "./.env"
+    ports:
+      - "8000:8000"
 
   zookeeper:
     image: zookeeper:3.8
