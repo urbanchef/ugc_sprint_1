@@ -5,8 +5,19 @@ services:
     restart: always
     env_file:
       - "./.env"
+    expose:
+      - 8000
+#    ports:
+#      - "8000:8000"
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./log/nginx:/var/log/nginx
     ports:
-      - "8000:8000"
+      - "80:80"
+    depends_on:
+      - ugc
 
   zookeeper:
     image: zookeeper:3.8
