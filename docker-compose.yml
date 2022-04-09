@@ -7,6 +7,8 @@ services:
       - "./.env"
     expose:
       - 8000
+    volumes:
+      - ${KAFKA_SSL_CAFILE}:/usr/src/app/CA.pem
 #    ports:
 #      - "8000:8000"
 
