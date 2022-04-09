@@ -39,4 +39,4 @@ class JWTConfig(BaseSettings):
         env_prefix = "JWT_"
 
     secret_key: str = "buz"
-    algorithms: List[str] = ["HS256"]
+    algorithms: str = "HS256"
