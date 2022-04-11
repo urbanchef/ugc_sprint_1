@@ -35,6 +35,7 @@ services:
       - "9000:9000"
     volumes:
       - ./data/node1:/etc/clickhouse-server
+      - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
     depends_on:
       - zookeeper
 
@@ -44,6 +45,7 @@ services:
     hostname: clickhouse-node2
     volumes:
       - ./data/node2:/etc/clickhouse-server
+      - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
     depends_on:
       - zookeeper
 
@@ -53,6 +55,7 @@ services:
     hostname: clickhouse-node3
     volumes:
       - ./data/node3:/etc/clickhouse-server
+      - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
     depends_on:
       - zookeeper
 
@@ -62,5 +65,6 @@ services:
     hostname: clickhouse-node4
     volumes:
       - ./data/node4:/etc/clickhouse-server
+      - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
     depends_on:
       - zookeeper
