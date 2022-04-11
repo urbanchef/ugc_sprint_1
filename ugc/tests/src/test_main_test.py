@@ -8,18 +8,16 @@ pytestmark = pytest.mark.asyncio
 
 headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9."
-    + "eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0ODkzMDUzMSwian"
-    + "RpIjoiNTlkYjUzMzUtY2Q2Zi00Mjk4LTg3MDctZDFhZTE2Y"
-    + "WQzYTM3IiwidHlwZSI6ImFjY2VzcyIsInVzZXJfdXVpZCI6I"
-    + "jY4ZWZlYzBkLTZiMzktNDU1ZC1hNDFjLTU4NDljMDI2OTU0Yi"
-    + "IsIm5iZiI6MTY0ODkzMDUzMSwiZXhwIjoxNzQzNTM4NTMxLCJ"
-    + "yZWZyZXNoX3V1aWQiOiJiNGMwM2E5My0xOTg1LTQ2N2YtYTNl"
-    + "MC01NTliMjJlZDNmODkiLCJ1c2VybmFtZSI6IlRlc3RfVXNlc"
-    + "iIsImVtYWlsIjoidXNlckBtYWlsLmNvbSIsImlzX3N1cGVydXN"
-    + "lciI6ZmFsc2UsImNyZWF0ZWRfYXQiOiIyMDIyLTA0LTAyVDIwO"
-    + "jAxOjM1LjQ4MjU3MCIsInJvbGVzIjpbInN1YnNjcmliZXIiXX0."
-    + "qvItA7hrVd1KPyJKWR_MqTYNL2cPK3ZuPuBdCVZLae0",
+    "Authorization": (
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"
+        ".eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0ODkzMDUzMSwianRpIjoiNTlkYjUzMzUtY2Q2Zi00Mjk4L"
+        "Tg3MDctZDFhZTE2YWQzYTM3IiwidHlwZSI6ImFjY2VzcyIsInVzZXJfdXVpZCI6IjY4ZWZlYzBkLTZ"
+        "iMzktNDU1ZC1hNDFjLTU4NDljMDI2OTU0YiIsIm5iZiI6MTY0ODkzMDUzMSwiZXhwIjoxNzQzNTM4N"
+        "TMxLCJyZWZyZXNoX3V1aWQiOiJiNGMwM2E5My0xOTg1LTQ2N2YtYTNlMC01NTliMjJlZDNmODkiLCJ"
+        "1c2VybmFtZSI6IlRlc3RfVXNlciIsImVtYWlsIjoidXNlckBtYWlsLmNvbSIsImlzX3N1cGVydXNlc"
+        "iI6ZmFsc2UsImNyZWF0ZWRfYXQiOiIyMDIyLTA0LTAyVDIwOjAxOjM1LjQ4MjU3MCIsInJvbGVzIjp"
+        "bInN1YnNjcmliZXIiXX0.qvItA7hrVd1KPyJKWR_MqTYNL2cPK3ZuPuBdCVZLae0"
+    ),
 }
 
 
