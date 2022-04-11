@@ -24,6 +24,9 @@ def serializer(value: Dict[str, Any]) -> bytes:
         if isinstance(v, datetime):
             value[k] = v.strftime("%Y-%m-%d %H:%M:%S")
 
+        if isinstance(v, bool):
+            value[k] = int(v)
+
     return dumps(value).encode()
 
 
