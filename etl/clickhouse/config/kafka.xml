@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<clickhouse>
+<company>
     <kafka>
         <sasl_username from_env="KAFKA_SASL_PLAIN_USERNAME"/>
         <sasl_password from_env="KAFKA_SASL_PLAIN_PASSWORD"/>
@@ -9,4 +9,4 @@
         <ssl_ca_location from_env="KAFKA_SSL_CAFILE"/>
         <auto_offset_reset>earliest</auto_offset_reset>
     </kafka>
-</clickhouse>
+</company>
