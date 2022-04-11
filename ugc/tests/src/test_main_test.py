@@ -2,7 +2,9 @@ from http import HTTPStatus
 
 import pytest
 
-from ugc.src.schemas.producer import LikeMessage, MovieProgressMessage
+from ugc.src.schemas import LikeMessage, MovieProgressMessage
+
+from ..testdata import MOVIE_ID, SECONDS_WATCHED
 
 pytestmark = pytest.mark.asyncio
 
@@ -22,26 +24,20 @@ headers = {
 
 
 async def test_track_movie_progress(make_post_request):
-    movie_id = "d50728e2-4f3e-4070-a5ba-6c3de400a9a4"
-    topic_name = "views"
-    data = MovieProgressMessage(unix_timestamp_utc=1649006765)
+    data = MovieProgressMessage(seconds_watched=SECONDS_WATCHED)
     response = await make_post_request(
-        f"/topics/{topic_name}/movies/{movie_id}/view",
+        f"/movies/{MOVIE_ID}/view",
         headers=headers,
         data=data.json(),
     )
     assert response.status == HTTPStatus.OK
-    assert response.body == {
-        "key": f"68efec0d-6b39-455d-a41c-5849c026954b+{movie_id}",
-        "value": "1649006765",
-        "topic": "views",
-    }
 
 
 async def test_process_like_message(make_post_request):
-    movie_id = "d50728e2-4f3e-4070-a5ba-6c3de400a9a4"
     data = LikeMessage(liked=True)
     response = await make_post_request(
-        f"/movies/{movie_id}/like", headers=headers, data=data.json()
+        f"/movies/{MOVIE_ID}/like",
+        headers=headers,
+        data=data.json(),
     )
     assert response.status == HTTPStatus.OK
