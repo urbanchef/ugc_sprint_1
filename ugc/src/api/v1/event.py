@@ -66,3 +66,19 @@ async def language_movies(
     }
     await aioproducer.send("views", value)
     return {"success": f"{language} language added for the movie with UUID {movie_id}."}
+
+
+@router.post("/movies/{movie_id}/viewed")
+async def viewed_movies(
+    movie_id: UUID,
+    request: Request,
+    aioproducer: AIOKafkaProducer = Depends(get_kafka_producer),
+):
+    """Add viewed movie."""
+
+    value = {
+        "user_uuid": request.state.user_uuid,
+        "viewed_movie": movie_id,
+    }
+    await aioproducer.send("views", value)
+    return {"success": f"Movie with UUID {movie_id} has been added."}
