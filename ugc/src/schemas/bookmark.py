@@ -1,15 +1,10 @@
 from datetime import datetime as dt
 
-from pydantic import BaseModel
+from ugc.src.schemas.base import OrjsonBaseModel
 
 
-class BookmarkMessage(BaseModel):
+class BookmarkMessage(OrjsonBaseModel):
     """Represents a bookmark message."""
 
     bookmarked: bool = True
     datetime: dt = dt.now()
-
-    class Config:
-        json_encoders = {
-            dt: lambda v: v.isoformat(),
-        }
