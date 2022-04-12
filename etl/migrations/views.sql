@@ -18,7 +18,8 @@ ENGINE = Kafka
 SETTINGS    kafka_broker_list = 'rc1b-5902ancqg160diig.mdb.yandexcloud.net:9091',
             kafka_topic_list = 'views',
             kafka_group_name = 'clickhouse-views-group',
-            kafka_format = 'JSONEachRow';
+            kafka_format = 'JSONEachRow',
+            kafka_skip_broken_messages = 5;
 
 
 CREATE MATERIALIZED VIEW views_queue_mv TO views AS
