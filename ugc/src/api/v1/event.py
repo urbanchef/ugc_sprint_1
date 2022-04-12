@@ -1,5 +1,4 @@
 import logging
-from datetime import datetime
 from uuid import UUID
 
 from aiokafka import AIOKafkaProducer
@@ -25,7 +24,7 @@ async def track_movie_progress(
     value = {
         "user_uuid": request.state.user_uuid,
         "movie_uuid": movie_id,
-        "datetime": datetime.now(),
+        "datetime": msg.datetime,
         "progress": msg.seconds_watched,
     }
     await aioproducer.send("views", value)
