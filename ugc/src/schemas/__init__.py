@@ -6,5 +6,6 @@ __all__ = [
 ]
 
 from .bookmark import BookmarkMessage
+from .language import LanguageMovie
 from .like import LikeMessage
-from .view import LanguageMovie, MovieProgressMessage
+from .view import MovieProgressMessage
