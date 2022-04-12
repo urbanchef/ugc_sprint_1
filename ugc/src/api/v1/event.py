@@ -81,9 +81,17 @@ async def language_movies(
         "user_uuid": request.state.user_uuid,
         "movie_id": movie_id,
         "language_movie": language,
+        "language_client": request.state.language,
     }
     await aioproducer.send("views", value)
-    return {"success": f"{language} language added for the movie with UUID {movie_id}."}
+    return {
+        "success": {
+            "User UUID": request.state.user_uuid,
+            "Movie UUID": movie_id,
+            "Movie language": language,
+            "Client language": request.state.language,
+        }
+    }
 
 
 @router.post("/movies/{movie_id}/watched")
