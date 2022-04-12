@@ -1,5 +1,6 @@
 import asyncio
 from dataclasses import dataclass
+from typing import Union
 
 import aiohttp
 import pytest
@@ -12,7 +13,7 @@ settings = TestSettings()
 
 @dataclass
 class HTTPResponse:
-    body: dict
+    body: Union[dict, str]
     headers: CIMultiDictProxy[str]
     status: int
 
