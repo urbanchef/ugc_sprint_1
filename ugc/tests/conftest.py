@@ -38,8 +38,12 @@ def make_get_request(http_client):
         params = params or {}
         url = f"{settings.service_url}/api/v1{method}"
         async with http_client.get(url, params=params) as response:
+            try:
+                body = await response.json()
+            except aiohttp.ContentTypeError:
+                body = await response.text()
             return HTTPResponse(
-                body=await response.json(),
+                body=body,
                 headers=response.headers,
                 status=response.status,
             )
