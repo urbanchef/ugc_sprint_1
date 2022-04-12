@@ -49,7 +49,7 @@ async def process_like_message(
     value = {
         "user_uuid": request.state.user_uuid,
         "movie_uuid": movie_id,
-        "datetime": datetime.now(),
+        "datetime": msg.datetime,
         "liked": msg.liked,
     }
     await aioproducer.send("likes", value)
