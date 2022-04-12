@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...dependency import get_kafka_producer
-from ...schemas import LikeMessage, MovieProgressMessage
+from ...schemas import LanguageMovie, LikeMessage, MovieProgressMessage
 
 router = APIRouter()
 
@@ -48,3 +48,21 @@ async def process_like_message(
     }
     await aioproducer.send("likes", value)
     return {"success": True}
+
+
+@router.post("/movies/{movie_id}/language")
+async def language_movies(
+    msg: LanguageMovie,
+    movie_id: UUID,
+    request: Request,
+    aioproducer: AIOKafkaProducer = Depends(get_kafka_producer),
+):
+    """Add language movie."""
+    language = msg.language_movie
+    value = {
+        "user_uuid": request.state.user_uuid,
+        "movie_id": movie_id,
+        "language_movie": language,
+    }
+    await aioproducer.send("views", value)
+    return {"success": f"{language} language added for the movie with UUID {movie_id}."}
