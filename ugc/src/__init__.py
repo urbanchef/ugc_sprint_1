@@ -1,10 +1,10 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
-from jose import JWTError, jwt
 
 from .api.v1 import event
 from .core.config import ProjectConfig
-from .dependency import get_jwt_settings, get_kafka_producer
+from .dependency import get_kafka_producer
+from .middleware.handlers_headers import jwt_handler, language_handler
 
 project_cfg = ProjectConfig()
 app = FastAPI(
@@ -15,49 +15,8 @@ app = FastAPI(
     default_response_class=ORJSONResponse,
 )
 
-
-@app.middleware("http")
-async def jwt_handler(request: Request, call_next):
-    """Middleware для соотнесения каждого запроса с конкретным пользователем.
-    Парсит JWT токен из Authorization заголовка вынимая UUID пользователя.
-    Пример payload:
-        {
-          "fresh": false,
-          "iat": 1647788608,
-          "jti": "b601df71-6452-4374-b580-64dab8574870",
-          "type": "access",
-          "user_uuid": "f75e4328-de43-46ca-bb44-52db4b487262",
-          "nbf": 1647788608,
-          "exp": 1647789508,
-          "refresh_uuid": "c2a3accf-51fd-44ff-aeb4-272ca03fa2ac",
-          "username": "admin",
-          "email": "admin@email.com",
-          "is_superuser": true,
-          "created_at": "2022-03-20T15:03:18.380452",
-          "roles": []
-        }
-    """
-
-    jwt_cfg = get_jwt_settings()
-    user_uuid: dict = {}
-    token_status = "None"
-
-    auth_header = request.headers.get("Authorization", "")
-    if auth_header.startswith("Bearer "):
-        token_status = "OK"
-        jwt_token = auth_header.split(" ")[1]
-        try:
-            payload = jwt.decode(
-                jwt_token, jwt_cfg.secret_key, algorithms=[jwt_cfg.algorithms]
-            )
-            user_uuid = payload.get("user_uuid", {})
-        except JWTError as e:
-            token_status = f"Error: {e}"
-
-    request.state.user_uuid = user_uuid
-    response = await call_next(request)
-    response.headers["X-Token-Status"] = token_status
-    return response
+app.middleware("http")(jwt_handler)
+app.middleware("http")(language_handler)
 
 
 @app.on_event("startup")
