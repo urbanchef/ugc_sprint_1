@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from .api.v1 import event
+from . import api
 from .core.config import ProjectConfig
 from .dependency import get_kafka_producer
 from .middleware.handlers_headers import jwt_handler, language_handler
@@ -31,4 +31,4 @@ async def shutdown_event():
     await producer.stop()
 
 
-app.include_router(event.router, prefix="/api/v1", tags=["events"])
+app.include_router(api.router)
