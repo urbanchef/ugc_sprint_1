@@ -1,3 +1,4 @@
+import logging
 from http import HTTPStatus
 
 import pytest
@@ -7,6 +8,7 @@ from ugc.src.schemas import LikeMessage
 from ..testdata import HEADERS, MOVIE_ID
 
 pytestmark = pytest.mark.asyncio
+logger = logging.getLogger(__name__)
 
 
 class TestMovieLike:
@@ -22,4 +24,5 @@ class TestMovieLike:
             headers=HEADERS,
             data=data.json(),
         )
+        logger.debug("Response: %s %s", response.status, response)
         assert response.status == HTTPStatus.OK
