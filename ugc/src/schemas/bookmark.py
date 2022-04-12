@@ -8,3 +8,8 @@ class BookmarkMessage(BaseModel):
 
     bookmarked: bool = True
     datetime: dt = dt.now()
+
+    class Config:
+        json_encoders = {
+            dt: lambda v: v.isoformat(),
+        }
