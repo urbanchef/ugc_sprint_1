@@ -8,7 +8,7 @@ services:
     expose:
       - 8000
     volumes:
-      - ${KAFKA_SSL_CAFILE}:/usr/src/app/CA.pem
+      - ${KAFKA_SSL_CAFILE}:/etc/CA.pem
 #    ports:
 #      - "8000:8000"
 
@@ -36,6 +36,9 @@ services:
     volumes:
       - ./data/node1:/etc/clickhouse-server
       - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
+      - ${KAFKA_SSL_CAFILE}:/etc/CA.pem
+    env_file:
+      - .env
     depends_on:
       - zookeeper
 
@@ -46,6 +49,9 @@ services:
     volumes:
       - ./data/node2:/etc/clickhouse-server
       - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
+      - ${KAFKA_SSL_CAFILE}:/etc/CA.pem
+    env_file:
+      - .env
     depends_on:
       - zookeeper
 
@@ -56,6 +62,9 @@ services:
     volumes:
       - ./data/node3:/etc/clickhouse-server
       - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
+      - ${KAFKA_SSL_CAFILE}:/etc/CA.pem
+    env_file:
+      - .env
     depends_on:
       - zookeeper
 
@@ -66,5 +75,8 @@ services:
     volumes:
       - ./data/node4:/etc/clickhouse-server
       - ./etl/clickhouse/config:/etc/clickhouse-server/config.d
+      - ${KAFKA_SSL_CAFILE}:/etc/CA.pem
+    env_file:
+      - .env
     depends_on:
       - zookeeper
