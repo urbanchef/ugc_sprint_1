@@ -29,7 +29,13 @@ async def track_movie_progress(
         "progress": msg.seconds_watched,
     }
     await aioproducer.send("views", value)
-    return {"success": True}
+    return {
+        "success": {
+            "User UUID": request.state.user_uuid,
+            "Movie UUID": movie_id,
+            "Progress": msg.seconds_watched,
+        }
+    }
 
 
 @router.post("/movies/{movie_id}/like")
@@ -47,7 +53,13 @@ async def process_like_message(
         "liked": msg.liked,
     }
     await aioproducer.send("likes", value)
-    return {"success": True}
+    return {
+        "success": {
+            "User UUID": request.state.user_uuid,
+            "Movie UUID": movie_id,
+            "Liked": msg.liked,
+        }
+    }
 
 
 @router.post("/movies/{movie_id}/bookmark")
@@ -65,7 +77,13 @@ async def bookmark_movie(
         "bookmarked": msg.bookmarked,
     }
     await aioproducer.send("bookmarks", value)
-    return {"success": True}
+    return {
+        "success": {
+            "User UUID": request.state.user_uuid,
+            "Movie UUID": movie_id,
+            "Bookmarked": msg.bookmarked,
+        }
+    }
 
 
 @router.post("/movies/{movie_id}/language")
@@ -82,8 +100,9 @@ async def language_movies(
         "movie_id": movie_id,
         "language_movie": language,
         "language_client": request.state.language,
+        "datetime": msg.datetime,
     }
-    await aioproducer.send("views", value)
+    await aioproducer.send("language", value)
     return {
         "success": {
             "User UUID": request.state.user_uuid,
@@ -106,5 +125,10 @@ async def watched_movies(
         "user_uuid": request.state.user_uuid,
         "watched_movie": movie_id,
     }
-    await aioproducer.send("views", value)
-    return {"success": f"Movie with UUID {movie_id} has been added."}
+    await aioproducer.send("watched", value)
+    return {
+        "success": {
+            "User UUID": request.state.user_uuid,
+            "Movie UUID": movie_id,
+        }
+    }
