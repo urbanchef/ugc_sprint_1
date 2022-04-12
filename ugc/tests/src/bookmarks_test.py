@@ -12,7 +12,7 @@ pytestmark = pytest.mark.asyncio
 class TestBookmarks:
     """Represents all bookmarks related tests."""
 
-    url = f"/movies/{MOVIE_ID}/view"
+    url = f"/movies/{MOVIE_ID}/bookmark"
 
     async def test_success(self, make_post_request):
         """Test success response."""
