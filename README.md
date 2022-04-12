@@ -21,6 +21,14 @@ export KAFKA_SSL_CAFILE=/Users/Downloads/CA.pem
 docker-compose up -d 
 ```
 
+### ClickHouse migrations
+
+After having brought the services up, run clickhouse migrations needed for etl.
+
+```shell
+cd etl && python3 migrator.py
+```
+
 ### Running the tests
 
 ```
