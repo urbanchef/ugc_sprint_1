@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...dependency import get_kafka_producer
-from ...schemas import LikeMessage, MovieProgressMessage
+from ...schemas import BookmarkMessage, LikeMessage, MovieProgressMessage
 
 router = APIRouter()
 
@@ -47,4 +47,22 @@ async def process_like_message(
         "liked": msg.liked,
     }
     await aioproducer.send("likes", value)
+    return {"success": True}
+
+
+@router.post("/movies/{movie_id}/bookmark")
+async def bookmark_movie(
+    msg: BookmarkMessage,
+    movie_id: UUID,
+    request: Request,
+    aioproducer: AIOKafkaProducer = Depends(get_kafka_producer),
+):
+    """Receive event with the movie bookmark data."""
+    value = {
+        "user_uuid": request.state.user_uuid,
+        "movie_uuid": movie_id,
+        "datetime": msg.datetime,
+        "bookmarked": msg.bookmarked,
+    }
+    await aioproducer.send("bookmarks", value)
     return {"success": True}
