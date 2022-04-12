@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<company>
+    <kafka>
+        <sasl_username from_env="KAFKA_SASL_PLAIN_USERNAME"/>
+        <sasl_password from_env="KAFKA_SASL_PLAIN_PASSWORD"/>
+        <security_protocol from_env="KAFKA_SECURITY_PROTOCOL"/>
+        <sasl_mechanisms from_env="KAFKA_SASL_MECHANISM"/>
+        <ssl_ca_location from_env="KAFKA_SSL_CAFILE"/>
+        <auto_offset_reset>earliest</auto_offset_reset>
+    </kafka>
+</company>

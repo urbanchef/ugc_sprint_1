@@ -1,4 +1,21 @@
 [[package]]
+name = "aiochclient"
+version = "2.1.0"
+description = "Async http clickhouse client for python 3.6+"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+sqlparse = ">=0.3.0"
+
+[package.extras]
+aiohttp = ["aiohttp (>=3.0.1)"]
+aiohttp-speedups = ["aiodns", "cchardet", "ciso8601 (>=2.1.1)", "aiohttp (>=3.0.1)"]
+httpx = ["httpx"]
+httpx-speedups = ["ciso8601 (>=2.1.1)", "httpx"]
+
+[[package]]
 name = "aiohttp"
 version = "3.8.1"
 description = "Async http client/server framework (asyncio)"
@@ -648,6 +665,14 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "sqlparse"
+version = "0.4.2"
+description = "A non-validating SQL parser."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[[package]]
 name = "starlette"
 version = "0.17.1"
 description = "The little ASGI library that shines."
@@ -742,9 +767,12 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "e5527637a8e2271fec0131b8a7d99ca325a1f15330b2bd5529ab319d3e01c519"
+content-hash = "a76fb495775f1463cfa024f8aae5fa610b479675a5fa0ff8a093413666ecd4b4"
 
 [metadata.files]
+aiochclient = [
+    {file = "aiochclient-2.1.0.tar.gz", hash = "sha256:a590e0103a55a2dc7dda4b350183ad0ef77f9b23f5a95bd1b7982e8f9bec4e00"},
+]
 aiohttp = [
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:1ed0b6477896559f17b9eaeb6d38e07f7f9ffe40b9f0f9627ae8b9926ae260a8"},
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:7dadf3c307b31e0e61689cbf9e06be7a867c563d5a63ce9dca578f956609abf8"},
@@ -1302,7 +1330,6 @@ pytest = [
 ]
 pytest-asyncio = [
     {file = "pytest-asyncio-0.18.3.tar.gz", hash = "sha256:7659bdb0a9eb9c6e3ef992eef11a2b3e69697800ad02fb06374a210d85b29f91"},
-    {file = "pytest_asyncio-0.18.3-1-py3-none-any.whl", hash = "sha256:16cf40bdf2b4fb7fc8e4b82bd05ce3fbcd454cbf7b92afc445fe299dabb88213"},
     {file = "pytest_asyncio-0.18.3-py3-none-any.whl", hash = "sha256:8fafa6c52161addfd41ee7ab35f11836c5a16ec208f93ee388f752bea3493a84"},
 ]
 pytest-cov = [
@@ -1359,6 +1386,10 @@ six = [
 sniffio = [
     {file = "sniffio-1.2.0-py3-none-any.whl", hash = "sha256:471b71698eac1c2112a40ce2752bb2f4a4814c22a54a3eed3676bc0f5ca9f663"},
     {file = "sniffio-1.2.0.tar.gz", hash = "sha256:c4666eecec1d3f50960c6bdf61ab7bc350648da6c126e3cf6898d8cd4ddcd3de"},
+]
+sqlparse = [
+    {file = "sqlparse-0.4.2-py3-none-any.whl", hash = "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"},
+    {file = "sqlparse-0.4.2.tar.gz", hash = "sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae"},
 ]
 starlette = [
     {file = "starlette-0.17.1-py3-none-any.whl", hash = "sha256:26a18cbda5e6b651c964c12c88b36d9898481cd428ed6e063f5f29c418f73050"},

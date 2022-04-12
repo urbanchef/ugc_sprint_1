@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- SSL bug workaround: https://github.com/ClickHouse/ClickHouse/issues/35552#issuecomment-1076896582 -->
+<company>
+    <openSSL>
+        <server>
+            <certificateFile remove="1"/>
+            <privateKeyFile remove="1"/>
+        </server>
+    </openSSL>
+</company>

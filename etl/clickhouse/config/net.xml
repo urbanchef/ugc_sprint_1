@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<!-- Listen all incoming connections on 0.0.0.0 -->
+<company>
+    <listen_host>0.0.0.0</listen_host>
+</company>
