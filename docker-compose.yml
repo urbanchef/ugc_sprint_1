@@ -80,3 +80,13 @@ services:
       - .env
     depends_on:
       - zookeeper
+
+  etl-migrations:
+    build:
+      context: ./etl
+      dockerfile: Dockerfile
+    container_name: etl
+    env_file:
+      - .env
+    depends_on:
+      - clickhouse-node1
