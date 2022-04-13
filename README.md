@@ -23,18 +23,14 @@ docker-compose up -d
 
 ### ClickHouse migrations
 
-After having brought the services up, run clickhouse migrations needed for etl.
-
-```shell
-cd etl && python3 migrator.py
-```
+etl-migrations service located in docker-compose file will execute all sql files
+under "migrations" folder. It will be done automatically.
 
 ### Running the tests
 
 ```
 pytest -v ugc/tests/
 ```
-
 
 ### Swagger api specifications
 
