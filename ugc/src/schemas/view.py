@@ -1,8 +1,8 @@
 from datetime import datetime as dt
 
-from pydantic import BaseModel
+from ugc.src.schemas.base import OrjsonBaseModel
 
 
-class MovieProgressMessage(BaseModel):
+class MovieProgressMessage(OrjsonBaseModel):
     seconds_watched: int
     datetime: dt = dt.now()

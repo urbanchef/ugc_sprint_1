@@ -12,15 +12,16 @@ CREATE TABLE bookmarks_queue (
     user_uuid UUID,
     movie_uuid UUID,
     datetime DateTime,
-    progress UInt8
+    bookmarked UInt8
 )
 ENGINE = Kafka
 SETTINGS    kafka_broker_list = 'rc1b-5902ancqg160diig.mdb.yandexcloud.net:9091',
             kafka_topic_list = 'bookmarks',
             kafka_group_name = 'clickhouse-bookmarks-group',
-            kafka_format = 'JSONEachRow';
+            kafka_format = 'JSONEachRow',
+            kafka_skip_broken_messages = 5;
 
 
 CREATE MATERIALIZED VIEW bookmarks_queue_mv TO bookmarks AS
-    SELECT user_uuid, movie_uuid, datetime, progress
+    SELECT user_uuid, movie_uuid, datetime, bookmarked
     FROM bookmarks_queue;

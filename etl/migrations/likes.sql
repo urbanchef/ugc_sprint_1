@@ -18,7 +18,8 @@ ENGINE = Kafka
 SETTINGS    kafka_broker_list = 'rc1b-5902ancqg160diig.mdb.yandexcloud.net:9091',
             kafka_topic_list = 'likes',
             kafka_group_name = 'clickhouse-likes-group',
-            kafka_format = 'JSONEachRow';
+            kafka_format = 'JSONEachRow',
+            kafka_skip_broken_messages = 5;
 
 
 CREATE MATERIALIZED VIEW likes_queue_mv TO likes AS
