@@ -1,11 +1,20 @@
-from abc import ABCMeta
+from abc import ABCMeta, abstractmethod
 
-from ..engines.message_broker.general import MessageBrokerEngine
+from ..engines.message_broker.general import MessageProducerEngine
 
 
 class GeneralService(metaclass=ABCMeta):
-    def __init__(self, message_broker: MessageBrokerEngine):
-        self.message_broker = message_broker
+    def __init__(self, producer: MessageProducerEngine):
+        self.producer = producer
 
-    async def send(self, topik_name: str, message: dict):
+    @property
+    @abstractmethod
+    def topic_name(self):
+        """Индекс или таблица в поисковом движке."""
         pass
+
+    async def send(self, message: dict):
+        await self.producer.send(
+            topik_name=self.topic_name,
+            message=message,
+        )

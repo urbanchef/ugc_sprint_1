@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...dependency import get_kafka_producer
-from ...schemas import BookmarkMessage, LanguageMovie, LikeMessage, MovieProgressMessage
+from ...schemas import BookmarkMessage, LikeMessage, MovieProgressMessage
 
 router = APIRouter()
 
@@ -81,33 +81,6 @@ async def bookmark_movie(
             "User UUID": request.state.user_uuid,
             "Movie UUID": movie_id,
             "Bookmarked": msg.bookmarked,
-        }
-    }
-
-
-@router.post("/movies/{movie_id}/language")
-async def language_movies(
-    msg: LanguageMovie,
-    movie_id: UUID,
-    request: Request,
-    aioproducer: AIOKafkaProducer = Depends(get_kafka_producer),
-):
-    """Add language movie."""
-    language = msg.language_movie
-    value = {
-        "user_uuid": request.state.user_uuid,
-        "movie_id": movie_id,
-        "language_movie": language,
-        "language_client": request.state.language,
-        "datetime": msg.datetime,
-    }
-    await aioproducer.send("language", value)
-    return {
-        "success": {
-            "User UUID": request.state.user_uuid,
-            "Movie UUID": movie_id,
-            "Movie language": language,
-            "Client language": request.state.language,
         }
     }
 
