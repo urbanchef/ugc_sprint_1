@@ -1,10 +1,12 @@
 from abc import ABCMeta, abstractmethod
 
-from ..engines.message_broker.general import MessageProducerEngine
+from ..engines.message_broker.kafka import KafkaProducerEngine
 
 
 class GeneralService(metaclass=ABCMeta):
-    def __init__(self, producer: MessageProducerEngine):
+    """Базовый сервис."""
+
+    def __init__(self, producer: KafkaProducerEngine):
         self.producer = producer
 
     @property
@@ -14,7 +16,4 @@ class GeneralService(metaclass=ABCMeta):
         pass
 
     async def send(self, message: dict):
-        await self.producer.send(
-            topik_name=self.topic_name,
-            message=message,
-        )
+        await self.producer.send(self.topic_name, message)

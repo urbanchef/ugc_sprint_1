@@ -3,9 +3,9 @@ import ssl
 from typing import Any, Dict, Optional
 
 from aiokafka import AIOKafkaProducer
-from utils import serializer
 
 from ..core.config import KafkaConfig
+from .utils import serializer
 
 logger = logging.getLogger(__name__)
 async_kafka_producer: Optional[AIOKafkaProducer] = None
@@ -36,8 +36,9 @@ async def kafka_producer_connect():
         params["sasl_plain_password"] = cfg.sasl_plain_password.get_secret_value()
     if "SSL" in cfg.security_protocol:
         params["ssl_context"] = ssl.create_default_context(cafile=cfg.ssl_cafile)
-    async_kafka_producer = AIOKafkaProducer(**params).start()
-    logger.info("Соединение Kafka Producer установлено.")
+    async_kafka_producer = AIOKafkaProducer(**params)
+    await async_kafka_producer.start()
+    logger.info("Producer установил соединение с Kafka.")
 
 
 async def kafka_producer_disconnect():
@@ -45,4 +46,4 @@ async def kafka_producer_disconnect():
 
     global async_kafka_producer
     await async_kafka_producer.stop()
-    logger.info("Соединение Kafka Producer установлено.")
+    logger.info("Producer разорвал соединение с Kafka.")

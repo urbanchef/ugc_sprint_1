@@ -1,11 +1,11 @@
 import asyncio
 
-from db.kafka import kafka_producer_connect, kafka_producer_disconnect
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
 from . import api
 from .core.config import ProjectConfig
+from .db.kafka import kafka_producer_connect, kafka_producer_disconnect
 from .middleware.handlers_headers import jwt_handler, language_handler
 
 project_cfg = ProjectConfig()

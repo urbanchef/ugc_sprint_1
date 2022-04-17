@@ -1,12 +1,13 @@
 from aiokafka import AIOKafkaProducer
-from general import MessageBrokerEngine
+
+from .general import MessageProducerEngine
 
 
-class KafkaEngine(MessageBrokerEngine):
+class KafkaProducerEngine(MessageProducerEngine):
     """Класс брокера сообщений Apache Kafka."""
 
     def __init__(self, producer: AIOKafkaProducer):
         self.producer = producer
 
-    def send(self, topik_name: str, message: dict) -> None:
-        pass
+    async def send(self, topic_name: str, message: dict):
+        await self.producer.send(topic_name, message)
