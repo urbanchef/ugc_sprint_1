@@ -1,14 +1,11 @@
 import asyncio
-import logging
 
-import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
 from ugc.src import api
 
 from .core.config import ProjectConfig
-from .core.logger import LOGGING
 from .db.kafka import kafka_producer_connect, kafka_producer_disconnect
 from .middleware.handlers_headers import jwt_handler, language_handler
 
@@ -40,12 +37,3 @@ async def shutdown_event():
 
 
 app.include_router(api.router)
-
-if __name__ == "__main__":
-    uvicorn.run(
-        "main:app",  # type: ignore
-        host="0.0.0.0",
-        port=8000,
-        log_config=LOGGING,
-        log_level=logging.DEBUG,
-    )
