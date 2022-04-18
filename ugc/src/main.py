@@ -1,10 +1,13 @@
 import asyncio
+import logging
 
+import api
+import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from . import api
 from .core.config import ProjectConfig
+from .core.logger import LOGGING
 from .db.kafka import kafka_producer_connect, kafka_producer_disconnect
 from .middleware.handlers_headers import jwt_handler, language_handler
 
@@ -12,8 +15,8 @@ project_cfg = ProjectConfig()
 app = FastAPI(
     title=project_cfg.name,
     description=project_cfg.description,
-    docs_url=project_cfg.docs_url,
-    openapi_url=project_cfg.openapi_url,
+    docs_url="/api/openapi",
+    openapi_url="/api/openapi.json",
     default_response_class=ORJSONResponse,
 )
 
@@ -36,3 +39,12 @@ async def shutdown_event():
 
 
 app.include_router(api.router)
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",  # type: ignore
+        host="0.0.0.0",
+        port=8000,
+        log_config=LOGGING,
+        log_level=logging.DEBUG,
+    )
