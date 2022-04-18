@@ -18,7 +18,7 @@ async def process_like_message(
     msg: RatingMessage,
     movie_id: UUID,
     request: Request,
-    like_service: RatingService = Depends(get_rating_service),
+    rating_service: RatingService = Depends(get_rating_service),
 ):
     """Like a movie."""
     value = {
@@ -27,7 +27,7 @@ async def process_like_message(
         "datetime": msg.datetime,
         "rating": msg.rating,
     }
-    await like_service.send(value)
+    await rating_service.send(value)
     return {
         "success": {
             "User UUID": request.state.user_uuid,
