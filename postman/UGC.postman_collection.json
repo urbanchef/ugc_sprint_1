@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "7a980040-b203-4d41-a122-a91177ab3d44",
+		"name": "UGC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Likes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"liked\": {{$randomBoolean}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/like",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{$randomUUID}}",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Views",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"seconds_watched\": {{$randomInt}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/view",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{$randomUUID}}",
+						"view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Language",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"language_movie\": \"fr-FR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/language",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{$randomUUID}}",
+						"language"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bookmark",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookmarked\": {{$randomBoolean}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/bookmark",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{$randomUUID}}",
+						"bookmark"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Watched",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/watched",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{$randomUUID}}",
+						"watched"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0ODkzMDUzMSwianRpIjoiNTlkYjUzMzUtY2Q2Zi00Mjk4LTg3MDctZDFhZTE2YWQzYTM3IiwidHlwZSI6ImFjY2VzcyIsInVzZXJfdXVpZCI6IjY4ZWZlYzBkLTZiMzktNDU1ZC1hNDFjLTU4NDljMDI2OTU0YiIsIm5iZiI6MTY0ODkzMDUzMSwiZXhwIjoxNzQzNTM4NTMxLCJyZWZyZXNoX3V1aWQiOiJiNGMwM2E5My0xOTg1LTQ2N2YtYTNlMC01NTliMjJlZDNmODkiLCJ1c2VybmFtZSI6IlRlc3RfVXNlciIsImVtYWlsIjoidXNlckBtYWlsLmNvbSIsImlzX3N1cGVydXNlciI6ZmFsc2UsImNyZWF0ZWRfYXQiOiIyMDIyLTA0LTAyVDIwOjAxOjM1LjQ4MjU3MCIsInJvbGVzIjpbInN1YnNjcmliZXIiXX0.qvItA7hrVd1KPyJKWR_MqTYNL2cPK3ZuPuBdCVZLae0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"type": "default",
+			"disabled": true
+		}
+	]
+}
