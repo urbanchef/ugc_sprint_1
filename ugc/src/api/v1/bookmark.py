@@ -1,8 +1,7 @@
 import logging
-from http import HTTPStatus
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...schemas.bookmark import BookmarkMessage
@@ -28,12 +27,7 @@ async def bookmark_movie(
         "datetime": msg.datetime,
         "bookmarked": msg.bookmarked,
     }
-    result = await bookmark_service.send(value)
-    if not result:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND,
-            detail="Неудачная отправка события.",
-        )
+    await bookmark_service.send(value)
     return {
         "success": {
             "User UUID": request.state.user_uuid,

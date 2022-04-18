@@ -1,8 +1,7 @@
 import logging
-from http import HTTPStatus
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...schemas import LikeMessage
@@ -28,12 +27,7 @@ async def process_like_message(
         "datetime": msg.datetime,
         "liked": msg.liked,
     }
-    result = await like_service.send(value)
-    if not result:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND,
-            detail="Неудачная отправка события.",
-        )
+    await like_service.send(value)
     return {
         "success": {
             "User UUID": request.state.user_uuid,

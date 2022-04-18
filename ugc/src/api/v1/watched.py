@@ -1,8 +1,7 @@
 import logging
-from http import HTTPStatus
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...services.getters import get_watch_service
@@ -25,12 +24,7 @@ async def watched_movies(
         "user_uuid": request.state.user_uuid,
         "watched_movie": movie_id,
     }
-    result = await watch_service.send(value)
-    if not result:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND,
-            detail="Неудачная отправка события.",
-        )
+    await watch_service.send(value)
     return {
         "success": {
             "User UUID": request.state.user_uuid,

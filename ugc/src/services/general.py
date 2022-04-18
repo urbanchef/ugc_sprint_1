@@ -1,6 +1,9 @@
+import logging
 from abc import ABCMeta, abstractmethod
 
 from ..engines.message_broker.kafka import KafkaProducerEngine
+
+logger = logging.getLogger(__name__)
 
 
 class GeneralService(metaclass=ABCMeta):
@@ -16,4 +19,7 @@ class GeneralService(metaclass=ABCMeta):
         pass
 
     async def send(self, message: dict):
-        await self.producer.send(self.topic_name, message)
+        try:
+            await self.producer.send(self.topic_name, message)
+        except Exception as e:
+            logger.info(f"Неудачная отправка события: {e}")
