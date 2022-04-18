@@ -4,8 +4,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
+from ...services import WatchService
 from ...services.getters import get_watch_service
-from ...services.watched import WatchService
 
 router = APIRouter()
 

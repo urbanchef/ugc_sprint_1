@@ -5,8 +5,8 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...schemas import MovieProgressMessage
+from ...services import ViewService
 from ...services.getters import get_view_service
-from ...services.view import ViewService
 
 router = APIRouter()
 

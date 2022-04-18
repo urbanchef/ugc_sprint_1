@@ -1,11 +1,11 @@
 __all__ = [
     "BookmarkMessage",
-    "LikeMessage",
+    "RatingMessage",
     "MovieProgressMessage",
     "LanguageMovie",
 ]
 
 from .bookmark import BookmarkMessage
 from .language import LanguageMovie
-from .like import LikeMessage
+from .rating import RatingMessage
 from .view import MovieProgressMessage

@@ -1,7 +1,7 @@
 from .general import GeneralService
 
 
-class LikeService(GeneralService):
+class RatingService(GeneralService):
     """Класс движка для отправки сообщений в соответствующий топик Kafka."""
 
-    topic_name = "likes"
+    topic_name = "ratings"
