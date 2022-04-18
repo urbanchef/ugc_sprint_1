@@ -1,5 +1,6 @@
-import v1
 from fastapi import APIRouter
+
+from ugc.src.api import v1
 
 router = APIRouter(prefix="/api")
 

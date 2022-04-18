@@ -1,10 +1,11 @@
 import asyncio
 import logging
 
-import api
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+
+from ugc.src import api
 
 from .core.config import ProjectConfig
 from .core.logger import LOGGING
