@@ -5,11 +5,7 @@ from fastapi import Depends
 
 from ..db.kafka import get_kafka_producer
 from ..engines.message_broker.kafka import KafkaProducerEngine
-from .bookmark import BookmarkService
-from .language import LanguageService
-from .like import LikeService
-from .view import ViewService
-from .watched import WatchService
+from . import BookmarkService, LanguageService, RatingService, ViewService, WatchService
 
 
 @lru_cache()
@@ -29,11 +25,11 @@ def get_language_service(
 
 
 @lru_cache()
-def get_like_service(
+def get_rating_service(
     producer: AIOKafkaProducer = Depends(get_kafka_producer),
-) -> LikeService:
+) -> RatingService:
     kafka_producer = KafkaProducerEngine(producer)
-    return LikeService(kafka_producer)
+    return RatingService(kafka_producer)
 
 
 @lru_cache()

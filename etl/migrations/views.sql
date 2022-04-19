@@ -15,7 +15,7 @@ CREATE TABLE views_queue (
     progress UInt32
 )
 ENGINE = Kafka
-SETTINGS    kafka_broker_list = 'rc1b-5902ancqg160diig.mdb.yandexcloud.net:9091',
+SETTINGS    kafka_broker_list = 'rc1a-45imagi1ndn4vtn0.mdb.yandexcloud.net:9091',
             kafka_topic_list = 'views',
             kafka_group_name = 'clickhouse-views-group',
             kafka_format = 'JSONEachRow',
