@@ -189,6 +189,15 @@
 						"type": "default"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"added\": {{$randomBoolean}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/watched",
 					"protocol": "http",
