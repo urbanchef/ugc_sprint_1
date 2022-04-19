@@ -3,7 +3,6 @@ import ssl
 from typing import Any, Dict, Optional
 
 from aiokafka import AIOKafkaProducer
-from aiokafka.helpers import create_ssl_context
 
 from ..core.config import KafkaConfig
 from .utils import serializer
@@ -27,19 +26,11 @@ async def kafka_producer_connect():
 
     cfg = KafkaConfig()
 
-    context = create_ssl_context(
-        cafile=cfg.ssl_cafile,  # CA used to sign certificate.
-        # certfile="./cert-signed",  # Signed certificate
-        # keyfile="./cert-key",  # Private Key file of `certfile` certificate
-        # password=cfg.sasl_plain_password,
-    )
-
     params: Dict[str, Any] = dict(
         bootstrap_servers=cfg.bootstrap_servers,
         security_protocol=cfg.security_protocol,
         sasl_mechanism=cfg.sasl_mechanism,
         value_serializer=serializer,
-        ssl_context=context,
     )
     if cfg.sasl_plain_username:
         params["sasl_plain_username"] = cfg.sasl_plain_username

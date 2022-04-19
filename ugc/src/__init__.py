@@ -23,14 +23,14 @@ app.middleware("http")(language_handler)
 
 
 @app.on_event("startup")
-async def startup_event():
+async def startup():
     await asyncio.gather(
         kafka_producer_connect(),
     )
 
 
 @app.on_event("shutdown")
-async def shutdown_event():
+async def shutdown():
     await asyncio.gather(
         kafka_producer_disconnect(),
     )
