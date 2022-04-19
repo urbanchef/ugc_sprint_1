@@ -2,7 +2,7 @@ from functools import lru_cache
 
 import orjson
 
-from ..core.config import JWTConfig
+from .config import JWTConfig
 
 
 @lru_cache()

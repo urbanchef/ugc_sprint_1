@@ -3,8 +3,7 @@ from http import HTTPStatus
 
 import pytest
 
-from ugc.src.schemas import LikeMessage
-
+from ...src.schemas import LikeMessage
 from ..testdata import HEADERS, MOVIE_ID
 
 pytestmark = pytest.mark.asyncio

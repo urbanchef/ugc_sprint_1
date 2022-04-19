@@ -2,8 +2,7 @@ from http import HTTPStatus
 
 import pytest
 
-from ugc.src.schemas import LanguageMovie
-
+from ...src.schemas import LanguageMovie
 from ..testdata import HEADERS, MOVIE_ID
 
 pytestmark = pytest.mark.asyncio

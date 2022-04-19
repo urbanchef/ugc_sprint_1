@@ -1,7 +1,7 @@
 import orjson
 from pydantic import BaseModel
 
-from ugc.src.core.utils import orjson_dumps
+from ..core.utils import orjson_dumps
 
 
 class OrjsonBaseModel(BaseModel):
