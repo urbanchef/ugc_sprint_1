@@ -40,3 +40,14 @@ class JWTConfig(BaseSettings):
 
     secret_key: str = "buz"
     algorithms: str = "HS256"
+
+
+class SentryConfig(BaseSettings):
+    """Represents Sentry config."""
+
+    class Config:
+        env_prefix = "SENTRY_"
+
+    dsn: Optional[SecretStr]
+    sample_rate: float = 1.0
+    traces_sample_rate: float = 0.0

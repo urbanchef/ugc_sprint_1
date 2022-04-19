@@ -7,6 +7,7 @@ from . import api
 from .core.config import ProjectConfig
 from .db.kafka import kafka_producer_connect, kafka_producer_disconnect
 from .middleware.handlers_headers import jwt_handler, language_handler
+from .services import sentry
 
 project_cfg = ProjectConfig()
 app = FastAPI(
@@ -23,6 +24,7 @@ app.middleware("http")(language_handler)
 
 @app.on_event("startup")
 async def startup_event():
+    sentry.init(app)
     await asyncio.gather(
         kafka_producer_connect(),
     )
