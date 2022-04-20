@@ -19,7 +19,9 @@ async def get_kafka_producer() -> AIOKafkaProducer:
 
 async def kafka_producer_connect():
     """Устанавливает соединение продюсера с сервисом Kafka."""
-
+    # TODO: избавится от глобальных переменных инициализировав async_kafka_producer
+    #  в on_startup и складывай в app.state. Из любого места можно будет
+    #  достать и использовать
     global async_kafka_producer
 
     cfg = KafkaConfig()
@@ -43,7 +45,7 @@ async def kafka_producer_connect():
 
 async def kafka_producer_disconnect():
     """Закрывает соединение продюсера с сервисом Kafka."""
-
+    # TODO: см. замечание выше.
     global async_kafka_producer
     await async_kafka_producer.stop()
     logger.info("Producer разорвал соединение с Kafka.")

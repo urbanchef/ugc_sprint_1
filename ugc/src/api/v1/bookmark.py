@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...schemas.bookmark import BookmarkMessage
-from ...services.bookmark import BookmarkService
+from ...services import BookmarkService
 from ...services.getters import get_bookmark_service
 
 router = APIRouter()

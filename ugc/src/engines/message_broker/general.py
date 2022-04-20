@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class MessageProducerEngine(ABC):
+class GeneralProducerEngine(ABC):
     """Класс абстрактного продюсера Kafka."""
 
     @abstractmethod
