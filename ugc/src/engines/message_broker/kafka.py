@@ -1,6 +1,7 @@
 import logging
 
 from aiokafka import AIOKafkaProducer
+from aiokafka.errors import KafkaError
 
 from .general import GeneralProducerEngine
 
@@ -16,5 +17,5 @@ class KafkaProducerEngine(GeneralProducerEngine):
     async def send(self, topic_name: str, message: dict):
         try:
             await self.producer.send(topic_name, message)
-        except Exception as e:
+        except KafkaError as e:
             logger.info(f"Неудачная отправка события: {e}")
