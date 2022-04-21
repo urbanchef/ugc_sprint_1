@@ -5,8 +5,8 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ...schemas import LanguageMovie
+from ...services import LanguageService
 from ...services.getters import get_language_service
-from ...services.language import LanguageService
 
 router = APIRouter()
 

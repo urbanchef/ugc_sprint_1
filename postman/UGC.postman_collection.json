@@ -1,12 +1,24 @@
 {
 	"info": {
-		"_postman_id": "7a980040-b203-4d41-a122-a91177ab3d44",
+		"_postman_id": "f4609d8f-0e4c-432a-a019-14e71d6cad50",
 		"name": "UGC",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Likes",
+			"name": "Rating",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"randomRating\", _.random(1, 10));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,7 +31,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"liked\": {{$randomBoolean}}\n}",
+					"raw": "{\n    \"rating\": {{randomRating}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -27,7 +39,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/like",
+					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/rating",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -40,7 +52,7 @@
 						"v1",
 						"movies",
 						"{{$randomUUID}}",
-						"like"
+						"rating"
 					]
 				}
 			},
@@ -177,6 +189,15 @@
 						"type": "default"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"added\": {{$randomBoolean}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://0.0.0.0/api/v1/movies/{{$randomUUID}}/watched",
 					"protocol": "http",

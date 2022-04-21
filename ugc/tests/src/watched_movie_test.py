@@ -2,6 +2,8 @@ from http import HTTPStatus
 
 import pytest
 
+from ugc.src.schemas import WatchedMessage
+
 from ..testdata import HEADERS, MOVIE_ID
 
 pytestmark = pytest.mark.asyncio
@@ -14,10 +16,10 @@ class TestWatchedMovie:
 
     async def test_success(self, make_post_request):
         """Test success case."""
-        data = MOVIE_ID
+        data = WatchedMessage()
         response = await make_post_request(
             self.url,
             headers=HEADERS,
-            data=data,
+            data=data.json(),
         )
         assert response.status == HTTPStatus.OK

@@ -15,7 +15,7 @@ CREATE TABLE bookmarks_queue (
     bookmarked UInt8
 )
 ENGINE = Kafka
-SETTINGS    kafka_broker_list = 'rc1b-5902ancqg160diig.mdb.yandexcloud.net:9091',
+SETTINGS    kafka_broker_list = 'rc1a-45imagi1ndn4vtn0.mdb.yandexcloud.net:9091',
             kafka_topic_list = 'bookmarks',
             kafka_group_name = 'clickhouse-bookmarks-group',
             kafka_format = 'JSONEachRow',

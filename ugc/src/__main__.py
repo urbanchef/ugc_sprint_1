@@ -2,7 +2,8 @@ import logging
 
 import uvicorn
 
-from . import app
+from ugc.src import app
+
 from .core.logger import LOGGING
 
 uvicorn.run(
