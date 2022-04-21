@@ -3,8 +3,7 @@ from http import HTTPStatus
 
 import pytest
 
-from ugc.src.schemas import MovieProgressMessage
-
+from ...src.schemas import MovieProgressMessage
 from ..testdata import HEADERS, MOVIE_ID, SECONDS_WATCHED
 
 pytestmark = pytest.mark.asyncio
