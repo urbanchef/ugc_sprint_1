@@ -18,6 +18,11 @@ services:
       - "80:80"
     depends_on:
       - ugc
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://logstash:5044
+        tag: nginx
 
   zookeeper:
     image: zookeeper:3.8
@@ -88,3 +93,8 @@ services:
       - .env
     depends_on:
       - clickhouse-node1
+
+networks:
+  default:
+    external:
+      name: ugc-network
