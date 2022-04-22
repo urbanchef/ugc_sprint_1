@@ -4,7 +4,7 @@ __all__ = [
     "MovieProgressMessage",
     "LanguageMovie",
     "WatchedMessage",
-    "LikeMessage"
+    "LikeMessage",
 ]
 
 from .bookmark import BookmarkMessage

@@ -18,6 +18,11 @@ services:
       - "80:80"
     depends_on:
       - ugc
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://127.0.0.1:5044
+        tag: nginx
 
   zookeeper:
     image: zookeeper:3.8
