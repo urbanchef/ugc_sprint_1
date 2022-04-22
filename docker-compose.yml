@@ -93,8 +93,3 @@ services:
       - .env
     depends_on:
       - clickhouse-node1
-
-networks:
-  default:
-    external:
-      name: ugc-network
