@@ -21,7 +21,7 @@ services:
     logging:
       driver: gelf
       options:
-        gelf-address: udp://logstash:5044
+        gelf-address: udp://127.0.0.1:5044
         tag: nginx
 
   zookeeper:
