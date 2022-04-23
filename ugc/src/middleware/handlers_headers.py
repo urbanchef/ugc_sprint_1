@@ -1,7 +1,7 @@
 from fastapi import Request
 from jose import JWTError, jwt
 
-from ugc.src.core.utils import get_jwt_settings
+from ..core.utils import get_jwt_settings
 
 
 async def jwt_handler(request: Request, call_next):

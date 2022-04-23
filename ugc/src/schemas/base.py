@@ -3,7 +3,7 @@ from datetime import datetime as dt
 import orjson
 from pydantic import BaseModel, Field
 
-from ugc.src.core.utils import orjson_dumps
+from ..core.utils import orjson_dumps
 
 
 class OrjsonBaseModel(BaseModel):

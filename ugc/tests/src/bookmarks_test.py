@@ -3,8 +3,7 @@ from http import HTTPStatus
 
 import pytest
 
-from ugc.src.schemas import BookmarkMessage
-
+from ...src.schemas import BookmarkMessage
 from ..testdata import HEADERS, MOVIE_ID
 
 pytestmark = pytest.mark.asyncio
