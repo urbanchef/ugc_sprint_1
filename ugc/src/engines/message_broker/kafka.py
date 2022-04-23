@@ -18,4 +18,4 @@ class KafkaProducerEngine(GeneralProducerEngine):
         try:
             await self.producer.send(topic_name, message)
         except KafkaError as e:
-            logger.info(f"Неудачная отправка события: {e}")
+            logger.exception(f"Producer не смог отправить событие. Ошибка: {e}")

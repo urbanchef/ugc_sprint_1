@@ -1,4 +1,5 @@
 import asyncio
+import logging
 
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
@@ -6,8 +7,12 @@ from fastapi.responses import ORJSONResponse
 from ugc.src import api
 
 from .core.config import ProjectConfig
-from .db.kafka import kafka_producer_connect, kafka_producer_disconnect
+from .db.kafka import get_event_broker
+from .engines.message_broker.kafka import KafkaProducerEngine
 from .middleware.handlers_headers import jwt_handler, language_handler
+
+logger = logging.getLogger(__name__)
+
 
 project_cfg = ProjectConfig()
 app = FastAPI(
@@ -24,16 +29,13 @@ app.middleware("http")(language_handler)
 
 @app.on_event("startup")
 async def startup():
-    await asyncio.gather(
-        kafka_producer_connect(),
-    )
+    await asyncio.gather(get_event_broker())
 
 
 @app.on_event("shutdown")
 async def shutdown():
-    await asyncio.gather(
-        kafka_producer_disconnect(),
-    )
+    event_broker: KafkaProducerEngine = get_event_broker()  # type: ignore
+    await asyncio.gather(event_broker.producer.stop())
 
 
 app.include_router(api.router)
