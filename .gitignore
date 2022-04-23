@@ -5,6 +5,7 @@
 *.env
 *.venv
 *.pem
+*.crt
 
 # OSX
 .DS_Store
