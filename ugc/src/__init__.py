@@ -4,7 +4,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from ugc.src import api
+from . import api
 
 from .core.config import ProjectConfig
 from .db.kafka import get_event_broker
