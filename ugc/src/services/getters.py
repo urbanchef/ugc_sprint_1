@@ -1,48 +1,42 @@
 from functools import lru_cache
 
-from aiokafka import AIOKafkaProducer
 from fastapi import Depends
 
-from ..db.kafka import get_kafka_producer
+from ..db.kafka import get_event_broker
 from ..engines.message_broker.kafka import KafkaProducerEngine
 from . import BookmarkService, LanguageService, RatingService, ViewService, WatchService
 
 
 @lru_cache()
 def get_bookmark_service(
-    producer: AIOKafkaProducer = Depends(get_kafka_producer),
+    producer: KafkaProducerEngine = Depends(get_event_broker),
 ) -> BookmarkService:
-    kafka_producer = KafkaProducerEngine(producer)
-    return BookmarkService(kafka_producer)
+    return BookmarkService(producer)
 
 
 @lru_cache()
 def get_language_service(
-    producer: AIOKafkaProducer = Depends(get_kafka_producer),
+    producer: KafkaProducerEngine = Depends(get_event_broker),
 ) -> LanguageService:
-    kafka_producer = KafkaProducerEngine(producer)
-    return LanguageService(kafka_producer)
+    return LanguageService(producer)
 
 
 @lru_cache()
 def get_rating_service(
-    producer: AIOKafkaProducer = Depends(get_kafka_producer),
+    producer: KafkaProducerEngine = Depends(get_event_broker),
 ) -> RatingService:
-    kafka_producer = KafkaProducerEngine(producer)
-    return RatingService(kafka_producer)
+    return RatingService(producer)
 
 
 @lru_cache()
 def get_view_service(
-    producer: AIOKafkaProducer = Depends(get_kafka_producer),
+    producer: KafkaProducerEngine = Depends(get_event_broker),
 ) -> ViewService:
-    kafka_producer = KafkaProducerEngine(producer)
-    return ViewService(kafka_producer)
+    return ViewService(producer)
 
 
 @lru_cache()
 def get_watch_service(
-    producer: AIOKafkaProducer = Depends(get_kafka_producer),
+    producer: KafkaProducerEngine = Depends(get_event_broker),
 ) -> WatchService:
-    kafka_producer = KafkaProducerEngine(producer)
-    return WatchService(kafka_producer)
+    return WatchService(producer)

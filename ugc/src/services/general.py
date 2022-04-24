@@ -1,9 +1,12 @@
-from abc import ABCMeta, abstractmethod
+import logging
+from abc import ABC, abstractmethod
 
 from ..engines.message_broker.kafka import KafkaProducerEngine
 
+logger = logging.getLogger(__name__)
 
-class GeneralService(metaclass=ABCMeta):
+
+class GeneralService(ABC):
     """Базовый сервис."""
 
     def __init__(self, producer: KafkaProducerEngine):
