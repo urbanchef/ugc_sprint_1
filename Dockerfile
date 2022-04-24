@@ -1,6 +1,6 @@
 # Dockerfile from https://github.com/python-poetry/poetry/discussions/1879
 # `python-base` sets up all our shared environment variables
-FROM python:3.9-slim as python-base
+FROM python:3.10.4-slim-bullseye as python-base
 ENV PYTHONUNBUFFERED=1 \
     # prevents python creating .pyc as files
     PYTHONDONTWRITEBYTECODE=1 \
@@ -70,11 +70,12 @@ CMD python -m app
 
 # `production` image used for runtime
 FROM python-base as production
+WORKDIR /usr/src/app
 ENV FASTAPI_ENV=production
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
-COPY ./ugc/src ./app
-CMD python -m app
+COPY . .
+# CMD python -m app
 
 EXPOSE 8000
 
-CMD gunicorn --bind 0.0.0.0:8000 app:app --worker-class uvicorn.workers.UvicornWorker
+CMD gunicorn --bind 0.0.0.0:8000 ugc.src:app --worker-class uvicorn.workers.UvicornWorker

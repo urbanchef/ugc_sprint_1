@@ -5,6 +5,6 @@ class GeneralProducerEngine(ABC):
     """Класс абстрактного продюсера Kafka."""
 
     @abstractmethod
-    async def send(self, topik_name: str, message: dict) -> None:
+    def send(self, topic_name: str, message: dict):
         """Абстрактный метод отправки события в указанный топик."""
         pass
