@@ -18,6 +18,7 @@ jupyter = "^1.0.0"
 requests = "^2.27.1"
 pymongo = "^4.1.1"
 clickhouse-driver = "^0.2.3"
+pandas = "^1.4.2"
 
 
 [tool.poetry.dev-dependencies]

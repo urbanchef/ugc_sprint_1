@@ -103,4 +103,3 @@ ENV/
 /auth_api/auth_api.db
 /CA.pem
 /benchmark/volumes
-*.csv
