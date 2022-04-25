@@ -5,6 +5,7 @@
 *.env
 *.venv
 *.pem
+*.crt
 
 # OSX
 .DS_Store
@@ -101,3 +102,4 @@ ENV/
 # Project
 /auth_api/auth_api.db
 /CA.pem
+/benchmark/volumes

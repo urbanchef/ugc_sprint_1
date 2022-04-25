@@ -23,14 +23,21 @@ docker-compose up -d
 
 ### ClickHouse migrations
 
-etl-migrations service located in docker-compose file will execute all sql files
-under "migrations" folder. It will be done automatically.
+Сервис etl-migrations, запущенный в docker-compose файле, автоматически выполнит все скрипты,
+находящиеся в директории "migrations".
 
 ### Running the tests
 
 ```
 pytest -v ugc/tests/
 ```
+
+### Storage benchmark
+
+1. MongoDB. 
+- массив данных состоит из 148000 документов
+- Выборка одного документа происходит за 166 ms
+- Поиск документов с условием field="A" за 133 ms
 
 ### Swagger api specifications
 
