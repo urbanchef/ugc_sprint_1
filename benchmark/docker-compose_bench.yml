@@ -16,9 +16,6 @@ services:
     container_name: mongo_test
     hostname: mongo_test
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: "admin"
-      MONGO_INITDB_ROOT_PASSWORD: "admin"
     volumes:
       - ./volumes/mongo_db:/data/db
     ports:
