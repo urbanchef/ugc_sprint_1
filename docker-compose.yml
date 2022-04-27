@@ -9,6 +9,11 @@ services:
       - 8000
     volumes:
       - ${KAFKA_SSL_CAFILE}:/etc/CA.pem
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://127.0.0.1:5044
+        tag: ugc
 
   nginx:
     build: ./nginx
